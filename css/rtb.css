@@ -1,0 +1,288 @@
+@charset "utf-8";
+
+body, div, input, textarea {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border-width: 0;
+}
+
+input, textarea {
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    background-color: white;
+    margin: 0;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-align: start;
+}
+
+input {
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    box-shadow: 0pt 1px 2px rgba(0, 0, 0, 0.18) inset;
+    width: 310px;
+}
+
+.input_label {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    font-size: 12px;
+    padding: 5px;
+    position: relative;
+    top: -10px;
+}
+
+textarea {
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    display: block;
+    box-shadow: 0pt 1px 2px rgba(0, 0, 0, 0.18) inset;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important;
+}
+
+.fc {
+    overflow: hidden;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.b {
+    display: block;
+}
+
+.ib {
+    display: inline-block;
+}
+
+
+.button {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background: #24A828;
+    border-radius: 3px;
+    font-size: 14px;
+    height: 16px;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 80px;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #1F9323;
+}
+
+.top {
+    text-align: center;
+    background-color: #000;
+    height: 44px;
+    background-image: url("images/top.png");
+    font-size: 15px;
+    border-bottom: 1px solid #000;
+}
+
+.top_button {
+    color: #f0f0f0;
+    text-decoration: none;
+    text-shadow: 0px -1px 1px #000;
+    float: right;
+    font-size: 15px;
+    padding: 12px 10px;
+    text-align: center;
+}
+
+.top_button:hover {
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 3px #fff;
+}
+
+.bottom {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+    text-align: center;
+    color: #999;
+}
+
+.content {
+    width: 970px;
+    margin: 0 auto 0 auto;
+}
+
+.h10 {
+    height: 10px;
+}
+
+.h20 {
+    height: 20px;
+}
+
+.w100 {
+    width: 100px;
+    display: inline-block;
+}
+
+.w75 {
+    width: 75px;
+    display: inline-block;
+}
+
+.title {
+    font-size: 16px;
+}
+
+.small_text {
+    font-size: 11px;
+}
+
+.link {
+    margin: 3px 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.link:hover {
+    color:  #385f8a;
+}
+
+.box {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    border-bottom: 2px solid #e2e2e9;
+    color: #778087;
+}
+
+.box_header {
+    padding: 6px 10px;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+    overflow: hidden;
+}
+
+.box_content {
+    padding: 6px 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.box_message {
+    padding: 10px;
+    font-size: 13px;
+    text-align: left;
+    background-color: #f3faff;
+    border-left: 5px solid #c7e8ff;
+    border-bottom: 1px solid #e2e2e2;
+    color: #333;
+}
+
+.inner_box {
+    margin: 10px 0 0 40px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #e2e2e9;
+    color: #778087;
+    font-size: 11px
+}
+
+.inner_box_header {
+    padding: 6px 10px;
+    font-size: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+    overflow: hidden;
+}
+
+.item {
+    padding: 6px 10px;
+    font-size: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+    overflow: hidden;
+}
+
+.login_background {
+    background-color: #d0d0d0;
+    background-image: url("images/grid.png");
+    background-repeat: repeat;
+}
+
+.login_content_panel {
+    height: 500px;
+}
+
+.login_right_panel {
+    width: 270px;
+    float: right;
+}
+
+.login_main_panel {
+    width: auto;
+    margin: 0px 290px 0px 0px;
+}
+
+.rtb_background {
+    background-color: #d0d0d0;
+    background-image: url("images/grid.png");
+    background-repeat: repeat;
+    padding-bottom: 10px;
+}
+
+.rtb_content_panel {
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.rtb_right_panel {
+    width: 270px;
+    float: right;
+}
+
+.rtb_main_panel {
+    width: auto;
+    margin: 0px 290px 0px 0px;
+}
+
+.rtb_max {
+    width: 250px;
+    height: 250px;
+}
+
+.rtb_small {
+    width: 66px;
+    height: 66px;
+}
+
+
+

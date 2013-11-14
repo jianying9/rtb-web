@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="团队">
+    <link rel="stylesheet" href="http://jianying9.github.io/libs/css/animate.css"/>
+    <link rel="stylesheet" href="http://jianying9.github.io/libs/css/jquery-ui-1.10.3.datepicker.css"/>
+    <link rel="stylesheet" href="http://jianying9.github.io/libs/css/yy.css"/>
+    <link rel="stylesheet" href="css/rtb.css?1"/>
+    <script type="text/javascript" src="http://jianying9.github.io/libs/scripts/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="http://jianying9.github.io/libs/scripts/jquery.mousewheel-3.0.6.js"></script>
+    <script type="text/javascript" src="http://jianying9.github.io/libs/scripts/jquery-ui-1.10.3.datepicker.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="http://jianying9.github.io/libs/scripts/yy.js"></script>
+<script type="text/javascript" src="http://jianying9.github.io/libs/scripts/crypto-js-core.js"></script>
+<script type="text/javascript" src="http://jianying9.github.io/libs/scripts/crypto-js-md5.js"></script>
+<script type="text/javascript" src="http://jianying9.github.io/libs/scripts/yy-module.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //初始化配置
+        $.yyConfig({
+            teamServer:'ws://192.168.59.48:80/rtb/socket.io',
+            defaultServer:'ws://192.168.59.48:80/rtb/socket.io',
+            logLevel:4,
+            version: 7
+        });
+        //加载主模块
+        $.yyLoadModule('rtb-main');
+    });
+</script>
+</body>
+</html>
