@@ -20,7 +20,6 @@ input, textarea {
     text-transform: none;
     text-indent: 0;
     text-shadow: none;
-    text-align: start;
 }
 
 input {
@@ -62,8 +61,25 @@ body {
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important;
 }
 
+.al {
+    text-align: left;
+}
+
+.ac {
+    text-align: center;
+}
+
+.ar {
+    text-align: right;
+}
+
 .fc {
     overflow: hidden;
+}
+
+.clear {
+    float: none;
+    clear: both;
 }
 
 .fr {
@@ -82,6 +98,27 @@ body {
     display: inline-block;
 }
 
+.border {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.warn {
+    color: red;
+    font-size: 11px;
+}
 
 .button {
     text-align: center;
@@ -93,7 +130,7 @@ body {
     height: 16px;
     padding: 12px 20px;
     cursor: pointer;
-    width: 80px;
+    min-width: 80px;
     display: inline-block;
 }
 
@@ -156,6 +193,11 @@ body {
     display: inline-block;
 }
 
+.w50 {
+    width: 50px;
+    display: inline-block;
+}
+
 .title {
     font-size: 16px;
 }
@@ -186,21 +228,18 @@ body {
 .box_header {
     padding: 6px 10px;
     font-size: 14px;
-    text-align: left;
     border-bottom: 1px solid #e2e2e2;
     overflow: hidden;
 }
 
 .box_content {
     padding: 6px 10px;
-    text-align: center;
     overflow: hidden;
 }
 
 .box_message {
     padding: 10px;
     font-size: 13px;
-    text-align: left;
     background-color: #f3faff;
     border-left: 5px solid #c7e8ff;
     border-bottom: 1px solid #e2e2e2;
@@ -224,12 +263,37 @@ body {
     overflow: hidden;
 }
 
-.item {
+.rtb_list > .yy_list_item {
     padding: 6px 10px;
     font-size: 12px;
     text-align: left;
     border-bottom: 1px solid #e2e2e2;
     overflow: hidden;
+}
+
+.rtb_item_image {
+    width: 48px;
+    height: 48px;
+}
+
+.rtb_item_content {
+    padding: 6px;
+    width: 540px;
+    overflow: hidden;
+}
+
+.rtb_list_input {
+    min-width: 10px;
+    border: 0 solid #ccc;
+    box-shadow: none;
+}
+
+.rtb_list_label {
+    min-width: 20px;
+    font-size: 12px;
+    padding: 3px;
+    position: relative;
+    top: -8px;
 }
 
 .login_background {
@@ -284,5 +348,56 @@ body {
     height: 66px;
 }
 
+.user_info_label {
+    display: inline-block;
+    width: 40px;
+    text-align: right;
+    font-size: 12px;
+    padding: 3px;
+    position: relative;
+    top: -8px;
+}
 
+.user_info_input {
+    width: 100px;
+    border: 0 solid #ccc;
+    box-shadow: none;
+}
 
+.image_warning {
+    top: 202px;
+    left: 395px;
+}
+
+.item_inner {
+    margin-left: 48px; 
+}
+
+.add_point_form {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.inline_label {
+    font-size: 12px;
+    padding: 8px 6px;
+    text-align: right;
+}
+
+.inline_button {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background: #24A828;
+    border-radius: 2px;
+    font-size: 13px;
+    height: 16px;
+    padding: 6px 10px;
+    cursor: pointer;
+    min-width: 40px;
+    display: inline-block;
+}
+
+.inline_button:hover {
+    background-color: #1F9323;
+}

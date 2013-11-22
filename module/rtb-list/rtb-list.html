@@ -1,114 +1,24 @@
-<div id="rtb-list" class="yy_module box">
+<div id="rtb-list" class="yy_module box" yyFinishedListener="rtb-list.initListener">
     <div class="yy_ignore box_header">
-        <div class="yy_button link fr" yyEventListener="rtb-list.publishListener">发布广告</div>
+        <div id="to-publish-button" class="yy_button link fr" yyEventListener="rtb-list.toPublishListener">发布广告</div>
         <div>我的广告</div>
         <div class="h10"></div>
-        <div id="publish-form" class="yy_form inner_box yy_hide">
+        <div id="publish-form" class="yy_form inner_box yy_hide relative" yyMessageListener="rtb-list.imageMessageListener">
             <div class="input_label">标题</div>
-            <input type="text" name="title"/>
-
+            <input type="text" name="adName"/>
             <div class="h10"></div>
-            <div class="input_label">图片地址（250*250）</div>
-            <input type="text" name="imgUrl"/>
-
+            <div class="input_label">图片地址</div>
+            <input type="file" name="imagePath" accept="image/gif, image/jpeg, image/png"/>
+            <div class="input_label">最佳像素250*250</div>
+            <input class="yy_hide" type="text" name="imageId"/>
             <div class="h10"></div>
             <div class="input_label">链接地址</div>
             <input type="text" name="url"/>
-
             <div class="h10"></div>
             <div class="input_label"></div>
-            <div class="yy_button button ib">发布</div>
+            <div class="yy_button button ib" yyEventListener="rtb-list.publishListener">发布</div>
         </div>
+        <div id="image-warn-panel" class="yy_panel h10 absolute warn image_warning yy_hide">图片大小要小于200k</div>
     </div>
-    <div class="yy_ignore item">
-        <div class="title">魅族MX3</div>
-        <div class="h10"></div>
-        <div class="yy_button small ib link" yyEventListener="rtb-list.extendListener">累计点击次数：2300次&nbsp;•&nbsp;累计花费:6900分&nbsp;•&nbsp;最后竞价:3号位-2分/次&nbsp;•&nbsp;最后操作时间：17分钟</div>
-        <div id="10000-extend" class="yy_panel"></div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone5c</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:3号位-4分/次&nbsp;•&nbsp;最后操作时间：28分钟</div>
-    </div>
-    <div class="item">
-        <div class="title">三星Galaxy S4</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:1号位-4分/次&nbsp;•&nbsp;最后操作时间：35分钟</div>
-    </div>
-    <div class="item">
-        <div class="title">三星Galaxy Note 3</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:7号位-4分/次&nbsp;•&nbsp;最后操作时间：1小时17分</div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone4</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:9号位-4分/次&nbsp;•&nbsp;最后操作时间：3小时20分</div>
-    </div>
-    <div class="item">
-        <div class="title">华为 荣耀3</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:10号位-4分/次&nbsp;•&nbsp;最后操作时间：17小时20分</div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone4s</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:8号位-4分/次&nbsp;•&nbsp;最后操作时间：1天前</div>
-    </div>
-    <div class="item">
-        <div class="title">联想 A820T</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:4号位-4分/次&nbsp;•&nbsp;最后操作时间：3天前</div>
-    </div>
-    <div class="item">
-        <div class="title">三星Galaxy Note 3</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:7号位-4分/次&nbsp;•&nbsp;最后操作时间：1小时17分</div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone4</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:9号位-4分/次&nbsp;•&nbsp;最后操作时间：3小时20分</div>
-    </div>
-    <div class="item">
-        <div class="title">华为 荣耀3</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:10号位-4分/次&nbsp;•&nbsp;最后操作时间：17小时20分</div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone4s</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:8号位-4分/次&nbsp;•&nbsp;最后操作时间：1天前</div>
-    </div>
-    <div class="item">
-        <div class="title">联想 A820T</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:4号位-4分/次&nbsp;•&nbsp;最后操作时间：3天前</div>
-    </div>
-    <div class="item">
-        <div class="title">三星Galaxy Note 3</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:7号位-4分/次&nbsp;•&nbsp;最后操作时间：1小时17分</div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone4</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:9号位-4分/次&nbsp;•&nbsp;最后操作时间：3小时20分</div>
-    </div>
-    <div class="item">
-        <div class="title">华为 荣耀3</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:10号位-4分/次&nbsp;•&nbsp;最后操作时间：17小时20分</div>
-    </div>
-    <div class="item">
-        <div class="title">苹果iPhone4s</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:8号位-4分/次&nbsp;•&nbsp;最后操作时间：1天前</div>
-    </div>
-    <div class="item">
-        <div class="title">联想 A820T</div>
-        <div class="h10"></div>
-        <div class="small">累计点击次数：2000次&nbsp;•&nbsp;累计花费:8000分&nbsp;•&nbsp;最后竞价:4号位-4分/次&nbsp;•&nbsp;最后操作时间：3天前</div>
-    </div>
+    <div id="ad-list" class="yy_list rtb_list" yyMessageListener="rtb-list.adMessageListener"></div>
 </div>
