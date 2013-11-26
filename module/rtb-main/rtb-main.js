@@ -22,6 +22,43 @@ $.yyLoadListener('rtb-main', {
                 act: 'INQUIRE_POINT'
             };
             yy.sendMessage(msg);
+            //初始化position-list
+            var positionList = yy.findInModule('position-list');
+            positionList.init({
+                key: 'positionId',
+                dataToHtml: function(data) {
+                    var result = '<div class="h20"></div>'
+                            + '<div class="yy_ignore box">'
+                            + '<div class="box_header">' + data.positionName + '</div>'
+                            + '<div class="yy_ignore box_content">'
+                            + '<canvas class="yy_image" id="' + data.positionId + '-position" yyHeight="250" yyWidth="250" yyMessageListener="rtb-main.positionMessageListener" yyEventListener="rtb-main.positionListener"></canvas>'
+                            + '</div>'
+                            + '</div>';
+                    return result;
+                }
+            });
+            //
+            var listData = [
+                {positionId: 0, positionName: '0号'},
+                {positionId: 1, positionName: '1号'},
+                {positionId: 2, positionName: '2号'},
+                {positionId: 3, positionName: '3号'},
+                {positionId: 4, positionName: '4号'},
+                {positionId: 5, positionName: '5号'},
+                {positionId: 6, positionName: '6号'},
+                {positionId: 7, positionName: '7号'},
+                {positionId: 8, positionName: '8号'},
+                {positionId: 9, positionName: '9号'}
+            ];
+            positionList.loadData(listData);
+            //加载广告位信息
+            var msg = {
+                act: 'INQUIRE_POSITION_AD'
+            };
+            for(var index = 0; index < listData.length; index++) {
+                msg.positionId = listData[index].positionId;
+                yy.sendMessage(msg);
+            }
         }
     },
     eventListener: {
@@ -53,6 +90,18 @@ $.yyLoadListener('rtb-main', {
                     yy.setContext({mainState: 'rtb-list'});
                 }
             }
+        },
+        positionListener: {
+            click: function(yy) {
+                var data = yy.getContext(yy.key);
+                if(data) {
+                    var url = data.url;
+                    if(url.indexOf('http://') === -1) {
+                        url = 'http://' + url;
+                    }
+                    window.open(url);
+                }
+            }
         }
     },
     messageListener: {
@@ -69,6 +118,31 @@ $.yyLoadListener('rtb-main', {
                     var data = message.data;
                     var pointForm = yy.findInModule('point-form');
                     pointForm.loadData(data);
+                }
+            },
+            ADD_AD_POINT: function(yy, message) {
+                if (message.flag === 'SUCCESS') {
+                    var data = message.data;
+                    var pointForm = yy.findInModule('point-form');
+                    pointForm.loadData(data);
+                }
+            }
+        },
+        positionMessageListener: {
+            INQUIRE_POSITION_AD: function(yy, message) {
+                var data = message.data;
+                var listItem = yy.group;
+                var itemData = listItem.getData();
+                if (data.positionId === itemData.positionId) {
+                    if (message.flag === 'SUCCESS') {
+                        var context = {};
+                        context[data.positionId + '-position'] = data;
+                        yy.setContext(context);
+                        //
+                        var image = new Image();
+                        image.src = data.dataUrl;
+                        yy.drawImage(image, 0, 0, 250, 250);
+                    }
                 }
             }
         }

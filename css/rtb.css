@@ -316,6 +316,10 @@ body {
     margin: 0px 290px 0px 0px;
 }
 
+.main_position_list > .yy_list_item{
+    cursor: pointer;
+}
+
 .rtb_background {
     background-color: #d0d0d0;
     background-image: url("images/grid.png");
@@ -341,11 +345,6 @@ body {
 .rtb_max {
     width: 250px;
     height: 250px;
-}
-
-.rtb_small {
-    width: 66px;
-    height: 66px;
 }
 
 .user_info_label {
@@ -401,3 +400,32 @@ body {
 .inline_button:hover {
     background-color: #1F9323;
 }
+
+.position_list {
+    margin: 0 auto;
+    width: 410px;
+}
+
+.position_list > .yy_list_item{
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.position_button {
+    font-size: 11px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    box-shadow: 0pt 1px 2px rgba(0, 0, 0, 0.18) inset;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.position_button:hover{
+    background: #24A828;
+}
+
+.yy_list_item.yy_selected > .position_button{
+    background: #24A828;
+    color: white;
+}
+

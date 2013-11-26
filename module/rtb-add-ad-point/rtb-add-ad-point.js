@@ -19,11 +19,5 @@ $.yyLoadListener('rtb-add-ad-point', {
         }
     },
     messageListener:{
-        adPointMessageListener: {
-            ADD_AD_POINT: function(yy, message) {
-                if (message.flag === 'SUCCESS') {
-                }
-            }
-        }
     }
 });

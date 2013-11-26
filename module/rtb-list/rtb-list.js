@@ -12,22 +12,22 @@ $.yyLoadListener('rtb-list', {
                 key: 'adId',
                 dataToHtml: function(data) {
                     var result = '<canvas id="image-' + data.imageId + '" class="yy_image fl" yyWidth="48" yyHeight="48" yyMessageListener="rtb-list.loadImageMessageListener"></canvas>'
-                            + '<div class="fl rtb_item_content">'
+                            + '<div class="yy_ignore fl rtb_item_content">'
                             + '<div class="title">' + data.adName + '</div>'
                             + '<div class="h10"></div>'
-                            + '<div class="small">'
-                            + '<div class="fl">累计点击次数：</div><div class="fl">' + data.clickNumber + '次</div>'
-                            + '<div class="fl">&nbsp;•&nbsp;累计花费:</div><div class="fl">' + data.clickPoint + '点</div>'
-                            + '<div class="fl">&nbsp;•&nbsp;剩余点数:</div><div class="fl">' + data.adPoint + '点</div>'
+                            + '<div class="yy_ignore small">'
+                            + '<div class="fl">累计点击次数：</div><div class="fl">' + data.clickNumber + '</div><div class="fl">次</div>'
+                            + '<div class="fl">&nbsp;•&nbsp;累计花费:</div><div class="fl">' + data.clickPoint + '</div><div class="fl">点</div>'
+                            + '<div class="fl">&nbsp;•&nbsp;剩余点数:</div><div id="' + data.adId + '-adPoint" class=" yy_label fl">' + data.adPoint + '</div><div class="fl">点</div>'
                             + '<div class="fl">&nbsp;•&nbsp;最后操作时间：</div><div class="fl">' + data.lastUpdateTime + '</div>'
                             + '</div>'
                             + '</div>'
                             + '<div class="yy_ignore clear fc">'
-                            + '<div class="yy_button link fr" yyEventListener="rtb-list.toAddAdPointListener">增加点数</div>'
-                            + '<div class="yy_button link fr">竞价</div>'
+                            + '<div class="yy_button link fr" yyEventListener="rtb-list.toAddAdPointListener" yyMessageListener="rtb-list.addAdPointMessageListener">增加点数</div>'
+                            + '<div class="yy_button link fr" yyEventListener="rtb-list.toAdBiddingListener" yyMessageListener="rtb-list.biddingMessageListener">竞价</div>'
                             + '</div>'
-                            + '<div id="' + data.adId + '-add-point" class="yy_panel border item_inner yy_hide"></div>'
-                            + '<div id="' + data.adId + '-bidding" class="yy_panel border item_inner yy_hide"></div>';
+                            + '<div id="' + data.adId + '-add-point-panel" class="yy_panel border item_inner yy_hide"></div>'
+                            + '<div id="' + data.adId + '-bidding-panel" class="yy_panel border item_inner yy_hide"></div>';
                     return result;
                 }
             });
@@ -80,13 +80,20 @@ $.yyLoadListener('rtb-list', {
             click: function(yy) {
                 var listItem = yy.group;
                 var itemData = listItem.getData();
-                var pointId = itemData.adId + '-add-point';
-                var biddingId = itemData.adId + '-bidding';
-                var biddingPanel = yy.findInModule(biddingId);
-                biddingPanel.hide();
-                var pointPanel = yy.findInModule(pointId);
-                var state = yy.getContext(pointId);
+                var pointId = itemData.adId + '-add-point-panel';
+                var biddingId = itemData.adId + '-bidding-panel';
+                var state = yy.getContext(biddingId);
                 var context = {};
+                if (state && state === 'show') {
+                    var biddingPanel = yy.findInModule(biddingId);
+                    biddingPanel.hide();
+                    context[biddingId] = 'hide';
+                    yy.setContext(context);
+                }
+                //
+                var pointPanel = yy.findInModule(pointId);
+                state = yy.getContext(pointId);
+                context = {};
                 if (state) {
                     if (state === 'show') {
                         pointPanel.hide();
@@ -99,6 +106,40 @@ $.yyLoadListener('rtb-list', {
                     pointPanel.loadModule('rtb-add-ad-point', {adId: itemData.adId});
                     context[pointId] = 'show';
                     pointPanel.show();
+                }
+                yy.setContext(context);
+            }
+        },
+        toAdBiddingListener: {
+            click: function(yy) {
+                var listItem = yy.group;
+                var itemData = listItem.getData();
+                var pointId = itemData.adId + '-add-point-panel';
+                var biddingId = itemData.adId + '-bidding-panel';
+                var state = yy.getContext(pointId);
+                var context = {};
+                if (state && state === 'show') {
+                    var pointPanel = yy.findInModule(pointId);
+                    pointPanel.hide();
+                    context[pointId] = 'hide';
+                    yy.setContext(context);
+                }
+                //
+                var biddingPanel = yy.findInModule(biddingId);
+                state = yy.getContext(biddingId);
+                context = {};
+                if (state) {
+                    if (state === 'show') {
+                        biddingPanel.hide();
+                        context[biddingId] = 'hide';
+                    } else {
+                        biddingPanel.show();
+                        context[biddingId] = 'show';
+                    }
+                } else {
+                    biddingPanel.loadModule('rtb-bidding', {adId: itemData.adId});
+                    context[biddingId] = 'show';
+                    biddingPanel.show();
                 }
                 yy.setContext(context);
             }
@@ -162,6 +203,55 @@ $.yyLoadListener('rtb-list', {
                             msg.imageId = imageId;
                             yy.sendMessage(msg);
                         }
+                    }
+                }
+            }
+        },
+        addAdPointMessageListener: {
+            ADD_AD_POINT: function(yy, message) {
+                if (message.flag === 'SUCCESS') {
+                    var listItem = yy.group;
+                    var itemData = listItem.getData();
+                    if (itemData.adId === message.data.adId) {
+                        var pointId = itemData.adId + '-add-point-panel';
+                        var state = yy.getContext(pointId);
+                        if (state && state === 'show') {
+                            var pointPanel = yy.findInModule(pointId);
+                            pointPanel.hide();
+                            var context = {};
+                            context[pointId] = 'hide';
+                            yy.setContext(context);
+                        }
+                        //
+                        var labelId = itemData.adId + '-adPoint';
+                        var adPointLabel = yy.findInModule(labelId);
+                        adPointLabel.setLabel(message.data.adPoint);
+                    }
+                }
+            }
+        },
+        biddingMessageListener: {
+            AD_BIDDING: function(yy, message) {
+                if (message.flag === 'SUCCESS') {
+                    var listItem = yy.group;
+                    var itemData = listItem.getData();
+                    var data = message.data;
+                    if (itemData.adId === data.adId) {
+                        var biddingId = itemData.adId + '-bidding-panel';
+                        var state = yy.getContext(biddingId);
+                        if (state && state === 'show') {
+                            var biddingPanel = yy.findInModule(biddingId);
+                            biddingPanel.hide();
+                            var context = {};
+                            context[biddingId] = 'hide';
+                            yy.setContext(context);
+                        }
+                        //
+                        var msg = {
+                            act: 'INQUIRE_POSITION_AD',
+                            positionId: data.positionId
+                        };
+                        yy.sendMessage(msg);
                     }
                 }
             }
