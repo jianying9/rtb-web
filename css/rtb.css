@@ -429,3 +429,8 @@ body {
     color: white;
 }
 
+.next_button {
+    text-align: center;
+    font-size: 13px;
+}
+

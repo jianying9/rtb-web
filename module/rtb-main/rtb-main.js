@@ -142,6 +142,12 @@ $.yyLoadListener('rtb-main', {
                         var image = new Image();
                         image.src = data.dataUrl;
                         yy.drawImage(image, 0, 0, 250, 250);
+                    } else {
+                        var image = new Image();
+                        image.onload = function() {
+                            yy.drawImage(image, 0, 0, 250, 250);
+                        };
+                        image.src = 'css/images/empty_ad.jpg';
                     }
                 }
             }

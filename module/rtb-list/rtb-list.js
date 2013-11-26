@@ -32,8 +32,11 @@ $.yyLoadListener('rtb-list', {
                 }
             });
             //加载当前登录用户的广告
+            adList.setPageSize(10);
             var msg = {
-                act: 'INQUIRE_AD'
+                act: 'INQUIRE_AD',
+                pageIndex: 1,
+                pageSize: 10
             };
             yy.sendMessage(msg);
         }
@@ -143,6 +146,20 @@ $.yyLoadListener('rtb-list', {
                 }
                 yy.setContext(context);
             }
+        },
+        nextListener: {
+            click: function(yy) {
+                var adList = yy.findInModule('ad-list');
+                var pageSize = adList.getPageSize();
+                var pageIndex = adList.getPageIndex();
+                pageIndex++;
+                var msg = {
+                    act: 'INQUIRE_AD',
+                    pageIndex: pageIndex,
+                    pageSize: pageSize
+                };
+                yy.sendMessage(msg);
+            }
         }
     },
     messageListener: {
@@ -174,6 +191,8 @@ $.yyLoadListener('rtb-list', {
             INSERT_AD: function(yy, message) {
                 if (message.flag === 'SUCCESS') {
                     var data = message.data;
+                    var publishForm = yy.findInModule('publish-form');
+                    publishForm.clear();
                     var adList = yy.findInModule('ad-list');
                     adList.addItemDataFirst(data);
                     var msg = {
@@ -193,6 +212,15 @@ $.yyLoadListener('rtb-list', {
                     } else {
                         var adList = yy.findInModule('ad-list');
                         adList.loadData(data);
+                        adList.setPageIndex(message.pageIndex);
+                        adList.setPageSize(message.pageSize);
+                        //判断是否显示下一页按钮
+                        var nextButton = yy.findInModule('next-button');
+                        if (data.length === message.pageSize) {
+                            nextButton.show();
+                        } else {
+                            nextButton.hide();
+                        }
                         //加载图片
                         var imageId;
                         var msg = {
