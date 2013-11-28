@@ -23,10 +23,10 @@ $.yyLoadListener('rtb-list', {
                             + '</div>'
                             + '</div>'
                             + '<div class="yy_ignore clear fc">'
-                            + '<div class="yy_button link fr" yyEventListener="rtb-list.toAddAdPointListener" yyMessageListener="rtb-list.addAdPointMessageListener">增加点数</div>'
+                            + '<div class="yy_button link fr" yyEventListener="rtb-list.toIncreaseAdPointListener" yyMessageListener="rtb-list.increaseAdPointMessageListener">增加点数</div>'
                             + '<div class="yy_button link fr" yyEventListener="rtb-list.toAdBiddingListener" yyMessageListener="rtb-list.biddingMessageListener">竞价</div>'
                             + '</div>'
-                            + '<div id="' + data.adId + '-add-point-panel" class="yy_panel border item_inner yy_hide"></div>'
+                            + '<div id="' + data.adId + '-increase-point-panel" class="yy_panel border item_inner yy_hide"></div>'
                             + '<div id="' + data.adId + '-bidding-panel" class="yy_panel border item_inner yy_hide"></div>';
                     return result;
                 }
@@ -79,11 +79,11 @@ $.yyLoadListener('rtb-list', {
                 }
             }
         },
-        toAddAdPointListener: {
+        toIncreaseAdPointListener: {
             click: function(yy) {
                 var listItem = yy.group;
                 var itemData = listItem.getData();
-                var pointId = itemData.adId + '-add-point-panel';
+                var pointId = itemData.adId + '-increase-point-panel';
                 var biddingId = itemData.adId + '-bidding-panel';
                 var state = yy.getContext(biddingId);
                 var context = {};
@@ -106,7 +106,7 @@ $.yyLoadListener('rtb-list', {
                         context[pointId] = 'show';
                     }
                 } else {
-                    pointPanel.loadModule('rtb-add-ad-point', {adId: itemData.adId});
+                    pointPanel.loadModule('rtb-increase-ad-point', {adId: itemData.adId});
                     context[pointId] = 'show';
                     pointPanel.show();
                 }
@@ -117,7 +117,7 @@ $.yyLoadListener('rtb-list', {
             click: function(yy) {
                 var listItem = yy.group;
                 var itemData = listItem.getData();
-                var pointId = itemData.adId + '-add-point-panel';
+                var pointId = itemData.adId + '-increase-point-panel';
                 var biddingId = itemData.adId + '-bidding-panel';
                 var state = yy.getContext(pointId);
                 var context = {};
@@ -235,13 +235,13 @@ $.yyLoadListener('rtb-list', {
                 }
             }
         },
-        addAdPointMessageListener: {
-            ADD_AD_POINT: function(yy, message) {
+        increaseAdPointMessageListener: {
+            INCREASE_AD_POINT: function(yy, message) {
                 if (message.flag === 'SUCCESS') {
                     var listItem = yy.group;
                     var itemData = listItem.getData();
                     if (itemData.adId === message.data.adId) {
-                        var pointId = itemData.adId + '-add-point-panel';
+                        var pointId = itemData.adId + '-increase-point-panel';
                         var state = yy.getContext(pointId);
                         if (state && state === 'show') {
                             var pointPanel = yy.findInModule(pointId);
@@ -274,7 +274,7 @@ $.yyLoadListener('rtb-list', {
                             context[biddingId] = 'hide';
                             yy.setContext(context);
                         }
-                        //
+                        //加载新广告
                         var msg = {
                             act: 'INQUIRE_POSITION_AD',
                             positionId: data.positionId

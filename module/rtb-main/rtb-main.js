@@ -26,12 +26,13 @@ $.yyLoadListener('rtb-main', {
             var positionList = yy.findInModule('position-list');
             positionList.init({
                 key: 'positionId',
+                itemMessageListener: 'rtb-main.positionMessageListener',
                 dataToHtml: function(data) {
                     var result = '<div class="h20"></div>'
                             + '<div class="yy_ignore box">'
-                            + '<div class="box_header">' + data.positionName + '</div>'
+                            + '<div id="' + data.positionId + '-position-ad-title" class="yy_label box_header">' + data.positionName + '</div>'
                             + '<div class="yy_ignore box_content">'
-                            + '<canvas class="yy_image" id="' + data.positionId + '-position" yyHeight="250" yyWidth="250" yyMessageListener="rtb-main.positionMessageListener" yyEventListener="rtb-main.positionListener"></canvas>'
+                            + '<canvas class="yy_image position_ad" id="' + data.positionId + '-position-ad" yyHeight="250" yyWidth="250" yyEventListener="rtb-main.positionListener"></canvas>'
                             + '</div>'
                             + '</div>';
                     return result;
@@ -55,7 +56,7 @@ $.yyLoadListener('rtb-main', {
             var msg = {
                 act: 'INQUIRE_POSITION_AD'
             };
-            for(var index = 0; index < listData.length; index++) {
+            for (var index = 0; index < listData.length; index++) {
                 msg.positionId = listData[index].positionId;
                 yy.sendMessage(msg);
             }
@@ -94,9 +95,9 @@ $.yyLoadListener('rtb-main', {
         positionListener: {
             click: function(yy) {
                 var data = yy.getContext(yy.key);
-                if(data) {
+                if (data) {
                     var url = data.url;
-                    if(url.indexOf('http://') === -1) {
+                    if (url.indexOf('http://') === -1) {
                         url = 'http://' + url;
                     }
                     window.open(url);
@@ -131,21 +132,26 @@ $.yyLoadListener('rtb-main', {
         positionMessageListener: {
             INQUIRE_POSITION_AD: function(yy, message) {
                 var data = message.data;
-                var listItem = yy.group;
-                var itemData = listItem.getData();
+                var itemData = yy.getData();
                 if (data.positionId === itemData.positionId) {
+                    var positionAdId = itemData.positionId + '-position-ad';
+                    var positionAd = yy.findInModule(positionAdId);
                     if (message.flag === 'SUCCESS') {
                         var context = {};
-                        context[data.positionId + '-position'] = data;
+                        context[itemData.positionId + '-position-ad'] = data;
                         yy.setContext(context);
                         //
                         var image = new Image();
                         image.src = data.dataUrl;
-                        yy.drawImage(image, 0, 0, 250, 250);
+                        positionAd.drawImage(image, 0, 0, 250, 250);
+                        var positionAdTitleId = itemData.positionId + '-position-ad-title';
+                        var positionAdTitle = yy.findInModule(positionAdTitleId);
+                        var title = itemData.positionName + '  ›  最高竞价:' + data.bid + '点/次';
+                        positionAdTitle.setLabel(title);
                     } else {
                         var image = new Image();
                         image.onload = function() {
-                            yy.drawImage(image, 0, 0, 250, 250);
+                            positionAd.drawImage(image, 0, 0, 250, 250);
                         };
                         image.src = 'css/images/empty_ad.jpg';
                     }

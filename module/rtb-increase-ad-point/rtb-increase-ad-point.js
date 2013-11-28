@@ -3,18 +3,18 @@
  * Date: 11/11/13
  * Time: 4:12 PM
  */
-$.yyLoadListener('rtb-add-ad-point', {
+$.yyLoadListener('rtb-increase-ad-point', {
     finishedListener:{
     },
     eventListener:{
         addAdPointListener: {
             click: function(yy) {
                 var adId = yy.getContext('adId');
-                var addForm = yy.findInModule('add-form');
-                var msg = addForm.getData();
-                msg.act = 'ADD_AD_POINT';
+                var increaseAdForm = yy.findInModule('increase-ad-form');
+                var msg = increaseAdForm.getData();
+                msg.act = 'INCREASE_AD_POINT';
                 msg.adId = adId;
-                addForm.sendMessage(msg);
+                increaseAdForm.sendMessage(msg);
             }
         }
     },
