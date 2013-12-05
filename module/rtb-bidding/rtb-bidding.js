@@ -48,7 +48,12 @@ $.yyLoadListener('rtb-bidding', {
                 msg.act = 'AD_BIDDING';
                 var adId = yy.getContext('adId');
                 msg.adId = adId;
-                yy.sendMessage(msg);
+                //默认所有标签
+                var tagIdArr = [103006, 103009, 122001, 125001, 151014];
+                for (var index = 0; index < tagIdArr.length; index++) {
+                    msg.tagId = tagIdArr[index];
+                    yy.sendMessage(msg);
+                }
             }
         }
     },

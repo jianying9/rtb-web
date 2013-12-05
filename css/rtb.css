@@ -188,6 +188,11 @@ body {
     display: inline-block;
 }
 
+.w160 {
+    width: 150px;
+    display: inline-block;
+}
+
 .w75 {
     width: 75px;
     display: inline-block;

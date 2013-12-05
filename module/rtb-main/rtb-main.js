@@ -30,7 +30,7 @@ $.yyLoadListener('rtb-main', {
                 dataToHtml: function(data) {
                     var result = '<div class="h20"></div>'
                             + '<div class="yy_ignore box">'
-                            + '<div id="' + data.positionId + '-position-ad-title" class="yy_label box_header">' + data.positionName + '</div>'
+                            + '<div class="box_header">' + data.positionName + '</div>'
                             + '<div class="yy_ignore box_content">'
                             + '<canvas class="yy_image position_ad" id="' + data.positionId + '-position-ad" yyHeight="250" yyWidth="250" yyEventListener="rtb-main.positionListener"></canvas>'
                             + '</div>'
@@ -52,14 +52,6 @@ $.yyLoadListener('rtb-main', {
                 {positionId: 9, positionName: '9号'}
             ];
             positionList.loadData(listData);
-            //加载广告位信息
-            var msg = {
-                act: 'INQUIRE_POSITION_AD'
-            };
-            for (var index = 0; index < listData.length; index++) {
-                msg.positionId = listData[index].positionId;
-                yy.sendMessage(msg);
-            }
         }
     },
     eventListener: {
@@ -103,6 +95,23 @@ $.yyLoadListener('rtb-main', {
                     window.open(url);
                 }
             }
+        },
+        inquireByUserIdListener: {
+            click: function(yy) {
+                var inquireForm = yy.findInModule('userid-inquire-form');
+                var data = inquireForm.getData();
+                if (data.userId) {
+                    //加载广告位信息
+                    var msg = {
+                        act: 'INQUIRE_POSITION_AD',
+                        userId: data.userId
+                    };
+                    for (var index = 0; index < 10; index++) {
+                        msg.positionId = index;
+                        yy.sendMessage(msg);
+                    }
+                }
+            }
         }
     },
     messageListener: {
@@ -121,7 +130,7 @@ $.yyLoadListener('rtb-main', {
                     pointForm.loadData(data);
                 }
             },
-            ADD_AD_POINT: function(yy, message) {
+            INCREASE_AD_POINT: function(yy, message) {
                 if (message.flag === 'SUCCESS') {
                     var data = message.data;
                     var pointForm = yy.findInModule('point-form');
@@ -144,16 +153,6 @@ $.yyLoadListener('rtb-main', {
                         var image = new Image();
                         image.src = data.dataUrl;
                         positionAd.drawImage(image, 0, 0, 250, 250);
-                        var positionAdTitleId = itemData.positionId + '-position-ad-title';
-                        var positionAdTitle = yy.findInModule(positionAdTitleId);
-                        var title = itemData.positionName + '  ›  最高竞价:' + data.bid + '点/次';
-                        positionAdTitle.setLabel(title);
-                    } else {
-                        var image = new Image();
-                        image.onload = function() {
-                            positionAd.drawImage(image, 0, 0, 250, 250);
-                        };
-                        image.src = 'css/images/empty_ad.jpg';
                     }
                 }
             }
