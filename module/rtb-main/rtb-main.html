@@ -20,16 +20,22 @@
                         <input class="user_info_input" type="text" name="point" disabled="disabled"/>
                     </div>
                 </div>
-                <div class="h20"></div>
+                <div class="h10"></div>
                 <div class="yy_panel box">
                     <div class="box_header">输入imei查询广告信息</div>
-                    <div id="userid-inquire-form" class="yy_form box_content">
-                        <input class="w160 fl" type="text" name="userId"/>
+                    <div id="imei-inquire-form" class="yy_form box_content">
+                        <input class="w170 fl" type="text" name="imei"/>
                         <div class="fl inline_label">&nbsp;</div>
-                        <div class="yy_button inline_button fl" yyEventListener="rtb-main.inquireByUserIdListener">查询</div>
+                        <div class="yy_button inline_button fl" yyEventListener="rtb-main.inquireByImeiListener">查询</div>
                     </div>
                 </div>
-                <div id="position-list" class="yy_list"></div>
+                <div class="h10"></div>
+                <div class="yy_panel box">
+                    <div class="box_header clear">imei标签集合</div>
+                    <div class="yy_label box_content imei_tags" yyMessageListener="rtb-main.tagMessageListener"></div>
+                </div>
+                <div class="h10"></div>
+                <div id="position-list" class="yy_list fc"></div>
             </div>
             <div id="rtb-main-panel" class="yy_panel rtb_main_panel"></div>
         </div>

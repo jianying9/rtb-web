@@ -188,8 +188,8 @@ body {
     display: inline-block;
 }
 
-.w160 {
-    width: 150px;
+.w170 {
+    width: 170px;
     display: inline-block;
 }
 
@@ -231,14 +231,14 @@ body {
 }
 
 .box_header {
-    padding: 6px 10px;
+    padding: 4px 2px;
     font-size: 14px;
     border-bottom: 1px solid #e2e2e2;
     overflow: hidden;
 }
 
 .box_content {
-    padding: 6px 10px;
+    padding: 2px 2px;
     overflow: hidden;
 }
 
@@ -322,7 +322,20 @@ body {
 }
 
 .position_ad {
+    width: 88px;
+    margin: 0 2px 2px 0;
+}
+
+.position_ad_image {
     cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+.imei_tags {
+    word-wrap: break-word;
+    min-height: 14px;
+    font-size: 12px;
 }
 
 .rtb_background {

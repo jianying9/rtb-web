@@ -26,13 +26,13 @@ $.yyLoadListener('rtb-main', {
             var positionList = yy.findInModule('position-list');
             positionList.init({
                 key: 'positionId',
+                itemClazz: 'position_ad fl',
                 itemMessageListener: 'rtb-main.positionMessageListener',
                 dataToHtml: function(data) {
-                    var result = '<div class="h20"></div>'
-                            + '<div class="yy_ignore box">'
+                    var result = '<div class="yy_ignore box">'
                             + '<div class="box_header">' + data.positionName + '</div>'
                             + '<div class="yy_ignore box_content">'
-                            + '<canvas class="yy_image position_ad" id="' + data.positionId + '-position-ad" yyHeight="250" yyWidth="250" yyEventListener="rtb-main.positionListener"></canvas>'
+                            + '<canvas class="yy_image position_ad_image" id="' + data.positionId + '-position-ad" yyHeight="80" yyWidth="80" yyEventListener="rtb-main.positionListener"></canvas>'
                             + '</div>'
                             + '</div>';
                     return result;
@@ -93,19 +93,32 @@ $.yyLoadListener('rtb-main', {
                         url = 'http://' + url;
                     }
                     window.open(url);
+                    //记录点击
+                    var msg = {
+                        act: 'CLICK_AD',
+                        positionId: data.positionId,
+                        adId: data.adId,
+                        bid: data.bid,
+                        userId: data.userId,
+                        tagId: data.tagId
+                    };
+                    yy.sendMessage(msg);
                 }
             }
         },
-        inquireByUserIdListener: {
+        inquireByImeiListener: {
             click: function(yy) {
-                var inquireForm = yy.findInModule('userid-inquire-form');
+                var inquireForm = yy.findInModule('imei-inquire-form');
                 var data = inquireForm.getData();
-                if (data.userId) {
-                    //加载广告位信息
+                if (data.imei) {
+                    //记载imei标签信息
                     var msg = {
-                        act: 'INQUIRE_POSITION_AD',
-                        userId: data.userId
+                        act: 'INQUIRE_TAG',
+                        imei: data.imei
                     };
+                    yy.sendMessage(msg);
+                    //加载广告位信息
+                    msg.act = 'INQUIRE_POSITION_AD';
                     for (var index = 0; index < 10; index++) {
                         msg.positionId = index;
                         yy.sendMessage(msg);
@@ -152,8 +165,22 @@ $.yyLoadListener('rtb-main', {
                         //
                         var image = new Image();
                         image.src = data.dataUrl;
-                        positionAd.drawImage(image, 0, 0, 250, 250);
+                        positionAd.drawImage(image, 0, 0, 80, 80);
+                    } else {
+                        var image = new Image();
+                        image.onload = function() {
+                            positionAd.drawImage(image, 0, 0, 80, 80);
+                        };
+                        image.src = 'css/images/empty_ad.jpg';
                     }
+                }
+            }
+        },
+        tagMessageListener: {
+            INQUIRE_TAG: function(yy, message) {
+                if (message.flag === 'SUCCESS') {
+                    var data = message.data;
+                    yy.setLabel(data.tagIds);
                 }
             }
         }

@@ -194,6 +194,8 @@ $.yyLoadListener('rtb-list', {
                     var publishForm = yy.findInModule('publish-form');
                     publishForm.clear();
                     var adList = yy.findInModule('ad-list');
+                    var nowDate = new Date();
+                    data.lastUpdateTime = $.yyShortDate(data.lastUpdateTime, nowDate);
                     adList.addItemDataFirst(data);
                     var msg = {
                         act: 'INQUIRE_IMAGE_BY_KEY',
@@ -210,6 +212,13 @@ $.yyLoadListener('rtb-list', {
                         var toPublishButton = yy.findInModule('to-publish-button');
                         toPublishButton.$this.click();
                     } else {
+                        //时间处理
+                        var nowDate = new Date();
+                        var lastUpdateTime;
+                        for (var index = 0; index < data.length; index++) {
+                            lastUpdateTime = data[index].lastUpdateTime;
+                            data[index].lastUpdateTime = $.yyShortDate(lastUpdateTime, nowDate);
+                        }
                         var adList = yy.findInModule('ad-list');
                         adList.loadData(data);
                         adList.setPageIndex(message.pageIndex);
