@@ -38,7 +38,6 @@ input {
     font-size: 12px;
     padding: 5px;
     position: relative;
-    top: -10px;
 }
 
 textarea {
@@ -188,6 +187,11 @@ body {
     display: inline-block;
 }
 
+.w150 {
+    width: 150px;
+    display: inline-block;
+}
+
 .w170 {
     width: 170px;
     display: inline-block;
@@ -200,6 +204,11 @@ body {
 
 .w50 {
     width: 50px;
+    display: inline-block;
+}
+
+.w20 {
+    width: 20px;
     display: inline-block;
 }
 

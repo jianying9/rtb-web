@@ -283,12 +283,6 @@ $.yyLoadListener('rtb-list', {
                             context[biddingId] = 'hide';
                             yy.setContext(context);
                         }
-                        //加载新广告
-                        var msg = {
-                            act: 'INQUIRE_POSITION_AD',
-                            positionId: data.positionId
-                        };
-                        yy.sendMessage(msg);
                     }
                 }
             }
